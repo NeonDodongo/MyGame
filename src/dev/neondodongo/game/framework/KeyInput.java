@@ -8,14 +8,13 @@ import dev.neondodongo.game.window.Handler;
 public class KeyInput extends KeyAdapter {
 	
 	Handler handler;
-	private boolean pressed = false;
+	private boolean doubleJump = false;
 	
 	public KeyInput(Handler handler) {
 		this.handler = handler;
 	}
 	
 	public void keyPressed(KeyEvent e) {
-		pressed = true;
 		
 		int key = e.getKeyCode(); //get code of key pressed 
 		
@@ -30,11 +29,18 @@ public class KeyInput extends KeyAdapter {
 				if(key == KeyEvent.VK_A) {
 					tempObject.setVelX(-6);
 				}
-				if(key == KeyEvent.VK_SPACE && !tempObject.isJumping()) {
+				if(key == KeyEvent.VK_SPACE && !tempObject.isJumping() && doubleJump == false) {
 					tempObject.setJumping(true);
-					tempObject.setVelY(-8);
+					tempObject.setVelY(-9);
+					doubleJump = true;
+					System.out.println("Jumped: " + doubleJump);
 				}
-				
+				else if(key == KeyEvent.VK_SPACE && doubleJump == true) {
+					doubleJump = false;
+					tempObject.setVelY(-10);
+					System.out.println("Jumped: " + doubleJump);
+					
+				}
 			}
 		}
 		
@@ -56,6 +62,9 @@ public class KeyInput extends KeyAdapter {
 				}
 				if(key == KeyEvent.VK_A && tempObject.getVelX() < 0) {
 					tempObject.setVelX(0);
+				}
+				if(key == KeyEvent.VK_SPACE) {
+
 				}
 			}
 		}
