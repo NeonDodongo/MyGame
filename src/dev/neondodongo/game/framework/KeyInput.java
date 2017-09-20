@@ -51,10 +51,10 @@ public class KeyInput extends KeyAdapter {
 			GameObject tempObject = handler.object.get(i);
 			
 			if(tempObject.getId() == ObjectId.Player) { //check if player
-				if(key == KeyEvent.VK_D) {
+				if(key == KeyEvent.VK_D && tempObject.getVelX() > 0) {
 					tempObject.setVelX(0);
 				}
-				if(key == KeyEvent.VK_A) {
+				if(key == KeyEvent.VK_A && tempObject.getVelX() < 0) {
 					tempObject.setVelX(0);
 				}
 			}
